@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from gi.repository import Gtk, Gio
 from gi.repository import Granite
 
@@ -10,6 +12,33 @@ class LLabel (Gtk.Label):
 class GraniteDemo(Granite.Application):
 
     def do_activate(self):
+        self.application_id = "org.pantheon.granite.demo";
+        self.flags = Gio.ApplicationFlags.FLAGS_NONE
+
+        self.program_name = "Granite Demo"
+        self.app_years = "2011 - 2013"
+
+        self.build_version = "0.2.3"
+        self.app_icon = "text-editor"
+        self.main_url = "https://launchpad.net/granite"
+        self.bug_url = "https://bugs.launchpad.net/granite"
+        self.help_url = "https://answers.launchpad.net/granite"
+        self.translate_url = "https://translations.launchpad.net/granite"
+
+        self.about_documenters = None
+        #self.about_artists = "Daniel P. Fore <daniel@elementaryos.org>"
+        #self.about_authors = (
+        #    "Maxwell Barvian <mbarvian@gmail.com>"
+        #    "Daniel Foré <daniel@elementaryos.org>"
+        #    "Avi Romanoff <aviromanoff@gmail.com>"
+        #    "Lucas Baudin <xapantu@gmail.com>"
+        #    "Victor Eduardo <victoreduardm@gmail.com>"
+        #    "Tom Beckmann <tombeckmann@online.de>"
+        #)
+
+        self.about_comments = "A demo of the Granite toolkit"
+        self.about_translators = "Launchpad Translators"
+
         self.window = Gtk.Window()
         self.window.set_title('Granite Demo')
         self.window.set_position(Gtk.WindowPosition.CENTER)
@@ -46,11 +75,11 @@ class GraniteDemo(Granite.Application):
         main_layout.add(statusbar)
 
         self.window.add(main_layout)
-
         self.window.set_default_size(800, 550)
         self.window.show_all()
+        self.show_about(self.window)
 
-    def show_light_window(self):
+    def show_light_window(self, widget):
 
         # TODO: New method is possible not the correct API conventional use
         light_window = Granite.WidgetsLightWindow.new("Light Window")
@@ -93,5 +122,6 @@ class GraniteDemo(Granite.Application):
 
 
 if __name__ == '__main__':
+    import sys
     application = GraniteDemo()
-    application.run("granite-demo", Gio.ApplicationFlags.FLAGS_NONE)
+    application.run('', Gio.ApplicationFlags.FLAGS_NONE)

@@ -16,9 +16,39 @@ class GraniteDemo(Granite.Application):
 
         self.add_window(self.window)
 
+        # Toolbar
+        main_toolbar = Gtk.Toolbar()
+        main_toolbar.set_hexpand(True)
+        main_toolbar.set_vexpand(False)
+
+        # Light window
+        light_window_item = Gtk.ToolButton(
+            Gtk.Image.new_from_icon_name("document-new", Gtk.IconSize.LARGE_TOOLBAR),
+            "Show LightWindow"
+        )
+        light_window_item.icon_name = "document-new"
+        light_window_item.tooltip_text = "Show Light Window"
+        light_window_item.halign = light_window_item.valign = Gtk.Align.CENTER
+        light_window_item.connect("clicked", self.show_light_window)
+
+        main_toolbar.insert (light_window_item, -1)
+
+        # Statusbar
+        statusbar = Granite.WidgetsStatusBar()
+        statusbar.set_text("Granite.Widgets.StatusBar")
+        statusbar.hexpand = True
+        statusbar.vexpand = False
+
+        main_layout = Gtk.Grid ()
+        main_layout.expand = True
+        main_layout.orientation = Gtk.Orientation.VERTICAL
+        main_layout.add(main_toolbar)
+        main_layout.add(statusbar)
+
+        self.window.add(main_layout)
+
         self.window.set_default_size(800, 550)
         self.window.show_all()
-        self.show_light_window()
 
     def show_light_window(self):
 
